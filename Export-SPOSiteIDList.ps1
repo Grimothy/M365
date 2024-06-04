@@ -75,7 +75,6 @@ $SPOSite = Read-Host "Please enter the full sharepoint URL"
 Connect-PnPOnline -Url $SPOSite -Interactive
 
 #Get list of Document Libraries
-$DocLibList = Get-PnPList | Where-Object {$_.BaseType -eq "DocumentLibrary" -and {Where-Object $_.Title -NE "Web Part Gallery"} -and {Where-Object $_.Title -NE "Web Part Gallery" }
 $DocLibList = Get-PnPList | Where-Object { $_.BaseType -eq "DocumentLibrary"`
     -and $_.Title -ne "Web Part Gallery"`
     -and $_.Title -ne "Theme Gallery"`
