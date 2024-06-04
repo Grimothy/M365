@@ -1,26 +1,4 @@
-<#
-.SYNOPSIS
-Automatically checks for and installs PowerShell 7 if not present.
 
-.DESCRIPTION
-This script performs a check for PowerShell 7 on the system. If PowerShell 7 is not detected, it proceeds to download and install the latest stable version. The script uses the official Microsoft URL to fetch the installer and executes it silently, requiring minimal user interaction. After the installation, it cleans up the downloaded installer file.
-
-.PARAMETER PSVersion
-The PSVersion parameter represents the version details of the currently installed PowerShell.
-
-.EXAMPLE
-PS C:\> .\Install-PowerShell7.ps1
-Runs the script to check for PowerShell 7 and installs it if it is not already installed.
-
-.NOTES
-Author: [Your Name]
-Last Updated: [Date]
-Version: 1.0
-Please run this script with administrative privileges.
-
-.LINK
-Documentation or repository link if available
-#>
 
 
 # Check if PowerShell 7 is installed
