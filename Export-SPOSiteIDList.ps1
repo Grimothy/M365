@@ -1,5 +1,36 @@
 
+<#
+.SYNOPSIS
+This script ensures PowerShell 7 and PnP.PowerShell module are installed, connects to SharePoint Online, and exports a list of document libraries.
 
+.DESCRIPTION
+This script performs a series of checks and actions to prepare a SharePoint Online environment for management. It begins by verifying if PowerShell 7 is installed and proceeds to install it if absent. Next, it checks for the PnP.PowerShell module and installs it if it's not available. After setting up the necessary tools, the script prompts the user to connect to a SharePoint Online site interactively. Once connected, it retrieves a list of all document libraries, excluding specific system libraries, and exports the details to a CSV file.
+
+.PARAMETER PSVersion
+The PSVersion parameter contains details about the installed PowerShell version.
+
+.PARAMETER module
+The module parameter checks for the availability of the PnP.PowerShell module.
+
+.PARAMETER SPOSite
+The SPOSite parameter takes the SharePoint Online site URL input from the user.
+
+.PARAMETER DocLibList
+The DocLibList parameter holds the list of document libraries after filtering out system libraries.
+
+.EXAMPLE
+PS C:\> .\YourScriptName.ps1
+Executes the script to set up the environment and export the document libraries list.
+
+.NOTES
+Author: [C.J. Coulter]
+Last Updated: [6/4/2024]
+Version: 1.0
+
+
+.LINK
+https://github.com/Grimothy/M365
+#>
 
 # Check if PowerShell 7 is installed
 $PSVersion = Get-Variable PSVersionTable -ErrorAction SilentlyContinue
