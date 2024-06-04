@@ -33,12 +33,11 @@ https://github.com/Grimothy/M365
 #>
 
 # Check if PowerShell 7 is installed
-$PSVersion = Get-Variable PSVersionTable -ErrorAction SilentlyContinue
-if ($PSVersion -and $PSVersion.Value.PSVersion.Major -eq 7) {
-    Write-Host "PowerShell 7 is already installed."
-} else {
-    Write-Host "PowerShell 7 is not installed. Installing the latest version..."
-
+if ($env:Path.Contains("C:\Program Files\PowerShell\7\") -eq $true)
+    {
+    Write-Host "Powershell 7 already installed on this system"
+} else { 
+    Write-Host "Powershell 7 NOT currently installed on system. Installing the latest version..."
     # Define the download path and installer file name
     $downloadPath = "$env:TEMP\PowerShell7-Installer.msi"
     $installerUrl = "https://aka.ms/powershell-release?tag=stable"
@@ -67,6 +66,15 @@ if ($module) {
     Install-Module -Name PnP.PowerShell -Scope CurrentUser -Force
 
     Write-Host "PnP.PowerShell module has been installed."
+}
+
+#check if script is running in powershell 7 
+
+if ($PSVersionTable.PSVersion.Major -ne "7")
+{
+    Write-Host -ForegroundColor Yellow "Script must run using PowerShell 7. The script will be reopened with Powershell 7"
+    pwsh -FilePath .\Export-SPOSiteIDList.ps1
+    exit
 }
 
 #Import PNP Module
