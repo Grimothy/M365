@@ -73,7 +73,7 @@ if ($module) {
 if ($PSVersionTable.PSVersion.Major -ne "7")
 {
     Write-Host -ForegroundColor Yellow "Script must run using PowerShell 7. The script will be reopened with Powershell 7"
-    pwsh -FilePath .\Export-SPOSiteIDList.ps1
+    pwsh .\Export-SPOSiteIDList.ps1
     exit
 }
 
