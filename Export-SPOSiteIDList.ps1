@@ -88,4 +88,32 @@ $DocLibList = Get-PnPList | Where-Object { $_.BaseType -eq "DocumentLibrary"`
 
 }
 
-$DocLibList | Select-Object -Property Title,Id | Export-Csv .\DocLibList.csv
+
+# Load the Windows Forms assembly
+Add-Type -AssemblyName System.Windows.Forms
+
+# Create a new SaveFileDialog
+$saveFileDialog = New-Object System.Windows.Forms.SaveFileDialog
+
+# Set initial directory, filter, and other properties if needed
+$saveFileDialog.initialDirectory = [Environment]::GetFolderPath("Desktop")
+$saveFileDialog.filter = "CSV files (*.csv)|*.csv"
+$saveFileDialog.Title = "Select a location to save the document library list"
+
+# Show the Save File dialog
+$result = $saveFileDialog.ShowDialog()
+
+# Check if the user clicked the 'Save' button
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+    $fileSavePath = $saveFileDialog.FileName
+    # Export the document library list to the chosen path
+    $DocLibList | Select-Object -Property Title,Id | Export-Csv -Path $fileSavePath -NoTypeInformation
+    Write-Host "Document library list has been saved to: $fileSavePath"
+} else {
+    Write-Host "Export cancelled. No file location was selected."
+}
+
+# Clean up resources
+$saveFileDialog.Dispose()
+
+
