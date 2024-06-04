@@ -69,6 +69,8 @@ if ($module) {
     Write-Host "PnP.PowerShell module has been installed."
 }
 
+#Import PNP Module
+import-module PnP.PowerShell
 #connect to SPO with PNP powershell with interactive connection
 Write-Host -ForegroundColor Green "Connecting to SharePoint Online"
 $SPOSite = Read-Host "Please enter the full sharepoint URL"
