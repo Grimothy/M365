@@ -38,18 +38,11 @@ if ($env:Path.Contains("C:\Program Files\PowerShell\7\") -eq $true)
     Write-Host "Powershell 7 already installed on this system"
 } else { 
     Write-Host "Powershell 7 NOT currently installed on system. Installing the latest version..."
-    # Define the download path and installer file name
-    $downloadPath = "$env:TEMP\PowerShell7-Installer.msi"
-    $installerUrl = "https://aka.ms/powershell-release?tag=stable"
-
-    # Download the installer
-    Invoke-WebRequest -Uri $installerUrl -OutFile $downloadPath
-
+   
     # Install PowerShell 7 silently
-    Start-Process -FilePath msiexec.exe -ArgumentList "/i `"$downloadPath`" /quiet" -Wait
+    iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI" 
 
-    # Remove the installer file
-    Remove-Item -Path $downloadPath -Force
+    
 
     Write-Host "PowerShell 7 has been installed."
 }
@@ -95,6 +88,9 @@ $DocLibList = Get-PnPList | Where-Object { $_.BaseType -eq "DocumentLibrary"`
     -and $_.Title -ne "List Template Gallery"`
     -and $_.Title -ne "Form Templates"`
     -and $_.Title -ne "Documents"`
+    -and $_.Title -ne "Solution Gallery"`
+    -and $_.Title -ne "Converted Forms"`
+    -and $_.Title -ne "appfiles"
 
 }
 
